@@ -1,0 +1,42 @@
+query ClinvarQuery($ensemblId: String!, $efoId: String!, $size: Int!, $cursor: String) {
+  target(ensemblId: $ensemblId) {
+    approvedSymbol
+  }
+  disease(efoId: $efoId) {
+    id
+    name
+    eva: evidences(
+      ensemblIds: [$ensemblId]
+      enableIndirect: true
+      datasourceIds: ["eva"]
+      size: $size
+      cursor: $cursor
+    ) {
+      cursor
+      count
+      rows {
+        disease {
+          id
+          name
+        }
+        variantEffect
+        directionOnTrait
+        diseaseFromSource
+        variantId
+        variantRsId
+        variantHgvsId
+        studyId
+        variantFunctionalConsequence {
+          id
+          label
+        }
+        clinicalSignificances
+        allelicRequirements
+        alleleOrigins
+        confidence
+        literature
+        cohortPhenotypes
+      }
+    }
+  }
+}

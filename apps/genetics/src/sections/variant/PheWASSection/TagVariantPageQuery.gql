@@ -1,0 +1,10 @@
+query TagVariantPheWASSectionQuery($variantId: String!) {
+  tagVariantsAndStudiesForIndexVariant(variantId: $variantId) {
+    associations {
+      tagVariant {
+        id
+        rsId
+      }
+    }
+  }
+}

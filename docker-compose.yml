@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  platform:
+    build:
+      context: .
+      dockerfile: apps/platform/Dockerfile
+      args:
+        REACT_APP_REVISION: ${REACT_APP_REVISION}
+    ports:
+      - "50000:3000"
+    volumes:
+      - ./apps/platform:/app
+      - /app/node_modules
+    command: yarn dev:platform
+
+  genetics:
+    build:
+      context: .
+      dockerfile: apps/genetics/Dockerfile
+      args:
+        REACT_APP_REVISION: ${REACT_APP_REVISION}
+    ports:
+      - "50001:3001"
+    volumes:
+      - ./apps/genetics:/app
+      - /app/node_modules
+    command: yarn dev:genetics
